@@ -18,6 +18,7 @@ from Data.SQILite import SQL_DB
 
 
 def MyApp(user):
+    
     'تشغيل الظام'
     # page = tb.Window(themename=SQL_DB.get_theme())
     page = tb.Window(themename='CustomTheme')
