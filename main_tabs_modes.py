@@ -15,10 +15,8 @@ from Ui.Track_drivers_frame import Track_drivers_frame
 # الأتصال بقاعدة البيانات
 from Data.SQILite import SQL_DB
 
-
-
 def MyApp(user):
-    
+    'Edit from desktop pc al saif'
     'تشغيل الظام'
     # page = tb.Window(themename=SQL_DB.get_theme())
     page = tb.Window(themename='CustomTheme')
