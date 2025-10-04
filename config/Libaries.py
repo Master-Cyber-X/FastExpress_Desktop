@@ -48,7 +48,7 @@ import time
 import qrcode
 
 # Database Connections sqlite3.
-import sqlite3
+# import sqlite3
 
 # Database Connections Supa.
 from supabase import create_client, Client # type: ignore

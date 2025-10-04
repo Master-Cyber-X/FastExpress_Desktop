@@ -3,7 +3,7 @@ from config.Libaries import *
 from config.sys_classes import *
 
 #Sqlite3 الأتصال بقاعدة البيانات
-from Data.SQILite import SQL_DB
+# from Data.SQILite import SQL_DB
 
 #Supabase الأتصال بقاعدة البيانات
 from Data.Supa import Supa

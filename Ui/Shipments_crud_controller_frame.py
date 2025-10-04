@@ -3,7 +3,7 @@ from config.Libaries import *
 from config.sys_classes import *
 
 #Sqlite3 الأتصال بقاعدة البيانات
-from Data.SQILite import SQL_DB
+# from Data.SQILite import SQL_DB
 
 #Supabase الأتصال بقاعدة البيانات
 from Data.Supa import Supa
@@ -57,16 +57,16 @@ def Controller_and_view_recorder_frame(master,home_img_logo):
         t.wm_attributes('-topmost', True)
         sys_class.centering_window(window=t)
         var = StringVar()
-        def trace_themem_choosing(*args):
-            SQL_DB.switch_theme_color(theme_name=choose_theme.get(),old_theme_name=SQL_DB.get_theme())
+        # def trace_themem_choosing(*args):
+            # SQL_DB.switch_theme_color(theme_name=choose_theme.get(),old_theme_name=SQL_DB.get_theme())
             # page.style.theme_use(choose_theme.get())
 
         
-        choose_theme = ttk.Combobox(t, values=SQL_DB.get_list_theme(),
+        choose_theme = ttk.Combobox(t, 
             font=('Times', 12, 'bold'), textvariable=var, cursor='hand2', justify='center', width=13)
-        choose_theme.set(value=SQL_DB.get_theme())
+        choose_theme.set()
         choose_theme.pack(fill='both')
-        var.trace_add('write', callback=trace_themem_choosing)
+        # var.trace_add('write', callback=trace_themem_choosing)
         t.mainloop()
 
     def drivers_manager():
