@@ -5,6 +5,12 @@ from config.sys_classes import *
 #Supabase الأتصال بقاعدة البيانات
 from Data.Supa import Supa
 
+# # تحميل ملف الترجمة
+# from config.Translations import translations
+
+# lang = 'ar'
+# def tra(key):
+#      return translations[lang].get(key,key) 
 
 def Drivers_Managemens_window():
         'شاشة إدارة السائقن'        
@@ -52,7 +58,7 @@ def Drivers_Managemens_window():
             # choose_driver_name.update()
             # choose_driver_name_search.configure(value=SQL_DB.fetch_list_drivers_name())
         
-        b0 = Button(f02, text='➕إضافة', cursor='hand2', bootstyle='info',
+        b0 = Button(f02, text='➕إضافة', cursor='hand2', bootstyle='info', width=24,
                     command=add_new_driver)
         b0.pack(fill='both', padx=3, pady=3, expand=True)
 
