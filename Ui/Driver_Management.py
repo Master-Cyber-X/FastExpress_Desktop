@@ -13,14 +13,14 @@ def Drivers_Managemens_window():
 
         
         # drivers_list = SQL_DB.fetch_list_drivers_name()
-        t = Toplevel()
-        t.iconbitmap(sys_icon)
-        t.title('إدارة المناديب')
-        t.geometry('700x650+300+200')
-        t.wm_attributes('-topmost', True)
+        root = Toplevel()
+        root.iconbitmap(sys_icon)
+        root.title('إدارة المناديب')
+        root.geometry('700x650+300+200')
+        root.wm_attributes('-topmost', True)
         sys_class.centering_window(window=t)
         
-        f0 = LabelFrame(t, text='تحكم')
+        f0 = LabelFrame(root, text='تحكم')
         f0.pack(fill='both')
 
         f01 = LabelFrame(f0, text='إدخال بيانات')
