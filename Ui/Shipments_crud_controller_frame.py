@@ -1,10 +1,7 @@
+# إستدعاء مكاتب الواجعات الرسومية و إعادادات التظام
 from config.Libaries import *
 # إستدعاء إعدادات النظام
 from config.sys_classes import *
-
-#Sqlite3 الأتصال بقاعدة البيانات
-# from Data.SQILite import SQL_DB
-
 #Supabase الأتصال بقاعدة البيانات
 from Data.Supa import Supa
 
@@ -69,97 +66,12 @@ def Controller_and_view_recorder_frame(master,home_img_logo):
         # var.trace_add('write', callback=trace_themem_choosing)
         t.mainloop()
 
-    def drivers_manager():
-        global drivers_list
-        drivers_list = SQL_DB.fetch_list_drivers_name()
-        t = Toplevel()
-        t.iconbitmap(sys_icon)
-        t.title('إدارة المناديب')
-        t.geometry('700x650+300+200')
-        t.wm_attributes('-topmost', True)
-        sys_class.centering_window(window=t)
-        
-        f0 = LabelFrame(t, text='تحكم')
-        f0.pack(fill='both')
-
-        f01 = LabelFrame(f0, text='إدخال بيانات')
-        f01.pack(fill='both', side='right', expand=True)
-        
-        l0 = Label(f01, text='أسم المندوب')
-        l0.pack(fill='both',)
-
-        e0 = Entry(f01)
-        e0.pack(fill='both',)
-    
-        l1 = Label(f01, text='رقم الجوال')
-        l1.pack(fill='both',)
-    
-        e1 = Entry(f01)
-        e1.pack(fill='both', )
-
-        l2 = Label(f01, text='رقم الهوية')
-        l2.pack(fill='both')
-    
-        e2 = Entry(f01)
-        e2.pack(fill='both', )
-
-        f02 = LabelFrame(f0, text='تحكم')
-        f02.pack(fill='both', side='left', padx=3, expand=True)
-        
-        def add_new_driver():
-            SQL_DB.add_new_driver(id=e2.get(),name=e0.get(),phone=e1.get())
-            messagebox.showinfo('ملاحضة', 'تم إضافة مندوب جديد', parent=t)
-            t.focus_set()
-            # choose_driver_name.set(value=[])
-            choose_driver_name.configure(value=SQL_DB.fetch_list_drivers_name())
-            choose_driver_name.update()
-            choose_driver_name_search.configure(value=SQL_DB.fetch_list_drivers_name())
-        
-        b0 = Button(f02, text='➕إضافة', cursor='hand2', bootstyle='info',
-                    command=add_new_driver)
-        b0.pack(fill='both', padx=3, pady=3, expand=True)
-
-        b1 = Button(f02, text='🗑️حذف', cursor='hand2', bootstyle='info',)
-        b1.pack(fill='both', padx=3, pady=3)
-        
-        b2 = Button(f02, text='✏️تعديل', cursor='hand2', bootstyle='info',)
-        b2.pack(fill='both', padx=3, pady=3)
-
-
-
-
-        f1 = LabelFrame(t, text='بيانات')
-        f1.pack(fill='both', expand=True)
-
-        scroDriver = Scrollbar(f1, orient='vertical', cursor='hand2')
-        scroDriver.pack(fill='both', side='right')
-
-        view_drivers = Treeview(f1, show='headings', columns=(0,1,2,3), cursor='hand2')
-        view_drivers.pack(fill='both', side='left', expand=True)
-        
-        view_drivers.heading(0, text='رقم الهوية')
-        view_drivers.heading(1, text='رقم الجوال')
-        view_drivers.heading(2, text='الاسم')
-        view_drivers.heading(3, text='#.م')
-        
-        def fetch_drivers_data():
-            view_drivers.delete(*view_drivers.get_children())
-            c = 0
-            for y in SQL_DB.fetch_drivers_data():
-                c+=1
-                view_drivers.insert('', 'end', values=(y[0],y[1],y[2],c))
-        fetch_drivers_data()
-        
-        t.mainloop()
-    
-
-
     def date_time_update():
         try:
             times = strftime('%H:%M:%S')
             dates = strftime('%Y-%m-%d')
             balance_of_user_entry.delete(0, END)
-            balance_of_user_entry.insert(0, SQL_DB.get_balance_total_report())
+            # balance_of_user_entry.insert(0, SQL_DB.get_balance_total_report())
             
             date_time_label.config(text=f'{dates} {times}')
             date_time_label.after(1000, date_time_update)
@@ -201,7 +113,7 @@ def Controller_and_view_recorder_frame(master,home_img_logo):
     
     last_inoice_entry = Entry(f2, width=5)
     last_inoice_entry.pack(fill='both', padx=3)
-    last_inoice_entry.insert(0, f'#{int(SQL_DB.generate_order_serial())-1}')
+    # last_inoice_entry.insert(0, f'#{int(SQL_DB.generate_order_serial())-1}')
     
 
     balance_of_user_lable = Label(f1, text='رصيد الخزنة', font=('times',12,'bold'))
@@ -209,14 +121,15 @@ def Controller_and_view_recorder_frame(master,home_img_logo):
     
     balance_of_user_entry = Entry(f2, width=5)
     balance_of_user_entry.pack(fill='both',pady=3)
-    try:
-        balance_of_user_entry.insert(0, SQL_DB.get_balance_total_report())
-    except:
-        balance_of_user_entry.insert(0, '0.00')
+    
+    # try:
+        # لعرض تحصيلات الاموال التي تم عبر مسؤال التوصيل 
+    #     balance_of_user_entry.insert(0, SQL_DB.get_balance_total_report())
+    # except:
+    #     balance_of_user_entry.insert(0, '0.00')
 
 
     def enable_copy_paste(widget):
-        print('Vaild')
         'بسمح لخاصة النسخ واللصق في حالة ان اللغة غير إنجليزي'
         # اختصارات النسخ
         widget.bind("<Control-c>", lambda e: widget.event_generate("<<Copy>>"))
@@ -232,12 +145,7 @@ def Controller_and_view_recorder_frame(master,home_img_logo):
 
 
 
-    # customer_label_id = Label(frame_data_entry, text='رقم العضوية')
-    # customer_label_id.pack()
-    
-    # customer_id_entry = Entry(frame_data_entry,justify='right')  # name customer
-    # # customer_id_entry.pack(fill='both')
-    
+
     customer_label_name = Label(frame_data_entry, text='أسم العميل')
     customer_label_name.pack()
 
@@ -271,7 +179,8 @@ def Controller_and_view_recorder_frame(master,home_img_logo):
     choose_driver_name_label.pack()
 
     # global choose_driver_name
-    choose_driver_name = ttk.Combobox(frame_data_entry, values=list(SQL_DB.fetch_list_drivers_name()),
+    # choose_driver_name = ttk.Combobox(frame_data_entry, values=list(SQL_DB.fetch_list_drivers_name()),
+    choose_driver_name = ttk.Combobox(frame_data_entry,
         font=('Times', 12, 'bold'),  cursor='hand2', justify='center',)
     choose_driver_name.set(value='غير معرف')
     choose_driver_name.pack(fill='both', padx=7)
@@ -306,97 +215,96 @@ def Controller_and_view_recorder_frame(master,home_img_logo):
     nots_entry.pack(fill='both', padx=7)
 
     
-    def add_data():
-        # To Sqlite3 | Supa
-        price = price_of_customer_order_entry.get()
-        try:
-            # Try convert entry to int.
-            int(price)
-        except ValueError:
-            pass
-            # messagebox.showwarning('ملاحضة', 'يجب إدخال قيمة رقمية')
-            # print('You cannot convert to int.')
-        try:
-            # Try convert entry to float.
-            float(price)
-        except ValueError:
-            pass
-            # print('You cannot convert to float.')
+    def add_delivery_order():
+        'إضاقة طلب توصيل جديدة'
+        
+        def data_validator():
+            'لفتره البيانات'
+            # To Sqlite3 | Supa
+            price = price_of_customer_order_entry.get()
+            try:
+                # Try convert entry to int.
+                int(price)
+            except ValueError:
+                pass
+                # messagebox.showwarning('ملاحضة', 'يجب إدخال قيمة رقمية')
+                # print('You cannot convert to int.')
+            try:
+                # Try convert entry to float.
+                float(price)
+            except ValueError:
+                pass
+
+                # messagebox.showwarning('ملاحضة', 'يجب إدخال قيمة رقمية')
+                # return
+
+            if price_of_customer_order_entry.get() =='':
+                messagebox.showwarning('ملاحضة', 'يجب إدخال سعر', parent=master)
+                return 
+            if price_of_customer_order_entry.get() == 0:
+                messagebox.showwarning('ملاحضة', 'يجب إدخال سعر', parent=master)
+                return
+        data_validator()
+
+        def add_new_order_supabase():
+            'supabase إدخال البيانات إلى قاعدة بيانات'
+            try:
+                Supa.add_new_order(
+                    price=price_of_customer_order_entry.get(),
+                    customer_name=customer_name.get(),
+                    customer_phone=customer_entry_phone.get(),
+                    driver=choose_driver_name.get(),
+                    payment_status='غير مدفوعة',
+                    customer_location=customer_location_entry.get(),
+                    order_id_shipment=order_id_in_store_entry.get(),
+                    order_status='جاري التوصيل',
+                    notes=nots_entry.get()
+                )
+            except ConnectionError as e:
+                messagebox.showerror('ملاحضة', f'تأكد من إتصالك باالإنترنت ثم عاود المحاولة :{e}', parent=master)
+                return
             
+            except Exception as e:
+                messagebox.showerror('ملاحضة', f'تأكد من إتصالك باالإنترنت ثم عاود المحاولة :{e}', parent=master)
+                return
+        add_new_order_supabase()
 
-            # messagebox.showwarning('ملاحضة', 'يجب إدخال قيمة رقمية')
-            # return
-
-        if price_of_customer_order_entry.get() =='':
-            messagebox.showwarning('ملاحضة', 'يجب إدخال سعر', parent=master)
-            return 
-        if price_of_customer_order_entry.get() == 0:
-            messagebox.showwarning('ملاحضة', 'يجب إدخال سعر', parent=master)
-            return
+        def update_widgets():
+            'تحدد ما سوف يتم تحديثه عبد العمليه'
+            # لتحديث قائمة المهام
+            update_controller_view_items()
+            balance_of_user_entry.delete(0, END)
+            # balance_of_user_entry.insert(0, SQL_DB.get_balance_total_report())
+            fetch_order_data('driver')
+            # Supa.fetch_collection_money_report()
+            
+            # عرض أخر فاتورة طلب توصيل
+            last_inoice_entry.delete(0, END)
+            # last_inoice_entry.insert(0, f'#{int(SQL_DB.generate_order_serial())-1}')
+            
+            
+            #  تنظيف الحقول  
+            price_of_customer_order_entry.delete(0, END)
+            customer_name.delete(0, END)
+            customer_entry_phone.delete(0, END)
+            customer_entry_phone.delete(0, END)
+            choose_driver_name.set('غير معرف')
+            customer_location_entry.delete(0, END)
+            order_id_in_store_entry.delete(0, END)
+            nots_entry.delete(0, END)
+        update_widgets()
         
-        # SQL_DB.add_new_order(
-        #     price=price_of_customer_order_entry.get(),
-        #     customer_name=customer_name.get(),
-        #     customer_phone=customer_entry_phone.get(),
-        #     driver=choose_driver_name.get(),
-        #     payment_status='غير مدفوعة',
-        #     payment_type=choose_payment_type.get(),
-        #     order_id_shipment=order_id_in_store_entry.get(),
-        #     order_status='جاري التوصيل',
-        #     notes=nots_entry.get()
-        #     )
-        try:
-            Supa.add_new_order(
-                price=price_of_customer_order_entry.get(),
-                customer_name=customer_name.get(),
-                customer_phone=customer_entry_phone.get(),
-                driver=choose_driver_name.get(),
-                payment_status='غير مدفوعة',
-                customer_location=customer_location_entry.get(),
-                order_id_shipment=order_id_in_store_entry.get(),
-                order_status='جاري التوصيل',
-                notes=nots_entry.get()
-            )
-        except ConnectionError as e:
-            messagebox.showerror('ملاحضة', f'تأكد من إتصالك باالإنترنت ثم عاود المحاولة :{e}', parent=master)
-            return
-        
-        except Exception as e:
-            messagebox.showerror('ملاحضة', f'تأكد من إتصالك باالإنترنت ثم عاود المحاولة :{e}', parent=master)
-            return
-        
-        update_controller_view_items()
-        balance_of_user_entry.delete(0, END)
-        balance_of_user_entry.insert(0, SQL_DB.get_balance_total_report())
-        
-        
-        
-        last_inoice_entry.delete(0, END)
-        last_inoice_entry.insert(0, f'#{int(SQL_DB.generate_order_serial())-1}')
-    
         # messagebox.showinfo('ملاحضة', f'تم تسجيل فاتورة جديدة {int(SQL_DB.generate_order_serial())-1}')
-
         messagebox.showinfo('ملاحضة', f'تم تسجيل فاتورة جديدة {int(Supa.generate_order_serial())-1}', parent=master)
-        fetch_order_data('driver')
-        # Supa.fetch_collection_money_report()
-        entries_clearing()
 
-    def entries_clearing():
-        price_of_customer_order_entry.delete(0, END)
-        customer_name.delete(0, END)
-        customer_entry_phone.delete(0, END)
-        customer_entry_phone.delete(0, END)
-        choose_driver_name.set('غير معرف')
-        customer_location_entry.delete(0, END)
-        order_id_in_store_entry.delete(0, END)
-        nots_entry.delete(0, END)
+
     
 
     frame_data_entry_button = LabelFrame(frame_data_entry)
     frame_data_entry_button.pack(fill='both')
 
     button_add = Button(frame_data_entry_button, text='➕إضافة طلب', cursor='hand2', bootstyle='info',
-                            command=lambda:threading.Thread(target=add_data()).start())
+                            command=lambda:threading.Thread(target=add_delivery_order()).start())
     button_add.pack(fill='both', pady=4, padx=4)
 
 
@@ -409,7 +317,6 @@ def Controller_and_view_recorder_frame(master,home_img_logo):
     def delete_recorder():
         # id_serial العصر المراد حذف عن طريق 
         item_selection = controller_report_treeview.item(controller_report_treeview.selection(),'values')[0]
-        
         # تأكيد حذف السجل
         ask_delete = messagebox.askyesno('ملاحضة' ,'هل تريد مسحل السجل', icon='info', parent=master)
         if ask_delete == FALSE:
@@ -423,7 +330,7 @@ def Controller_and_view_recorder_frame(master,home_img_logo):
         
         update_controller_view_items()
         balance_of_user_entry.delete(0, END)
-        balance_of_user_entry.insert(0, SQL_DB.get_balance_total_report())
+        # balance_of_user_entry.insert(0, SQL_DB.get_balance_total_report())
         
     button_delete_recorder = Button(frame_data_entry_button, text='🗑حذف السجل', cursor='hand2', bootstyle='info', command=delete_recorder)
     button_delete_recorder.pack(fill='both', pady=4, padx=4,)
@@ -461,11 +368,10 @@ def Controller_and_view_recorder_frame(master,home_img_logo):
 
 
     ###################################'التحكم بالسجلات'################################################
-    global controller_report_treeview,driver_var_controller
     # d = note_book.index(note_book.select())
 
-    'عرض وتحكم بالسجلات'    
-    global update_controller_view_items
+    'عرض وتحكم بالسجلات'
+
 
 
 
@@ -540,7 +446,7 @@ def Controller_and_view_recorder_frame(master,home_img_logo):
     def receive_order():
         'تغيير حالة السجل إلى تم التسليم'
         item = controller_report_treeview.item(controller_report_treeview.selection(),'values'[0][0])
-        
+
         # في حالة انهو لم يتم تعيين السائق
         if item[5] == 'غير معرف':
             messagebox.showwarning('ملاحضة', 'يرجى تعيين المندوب', parent=master)
@@ -553,7 +459,8 @@ def Controller_and_view_recorder_frame(master,home_img_logo):
         # sqlite3 تحصيل من
         # SQL_DB.receive_order(id=item[0])
         # supabase تحصيل من
-        Supa.receive_order(serial=item[0])
+        Supa.receive_order(serial=item[0]) 
+        # تحديث السجل
         fetch_order_data(driver=driver_var_controller.get())
         messagebox.showinfo('ملاحضة', f'تم تسليم السجل {item[0]}', parent=master)
         
@@ -583,13 +490,14 @@ def Controller_and_view_recorder_frame(master,home_img_logo):
     choose_driver_name_label_search.pack(side='right', padx=10)
     
     def trace_drivers_name(*args):
+        'للبحث عن بأسم المندوب'
         driver = driver_var_controller.get()
         fetch_order_data(driver=driver)
 
     driver_var_controller = StringVar()
 
     global choose_driver_name_search
-    choose_driver_name_search = ttk.Combobox(frame_viewers_tools_1, values=SQL_DB.fetch_list_drivers_name(),
+    choose_driver_name_search = ttk.Combobox(frame_viewers_tools_1,
         font=('Times', 12, 'bold'),  cursor='hand2', justify='center', width=13, textvariable=driver_var_controller)
     choose_driver_name_search.set(value='الكل')
     choose_driver_name_search.pack(side='right')
@@ -603,18 +511,6 @@ def Controller_and_view_recorder_frame(master,home_img_logo):
     choose_payment_type_search.set(value='كاش')
     # choose_payment_type_search.pack(fill='both',side='right')
 
-    
-    from_date_label_search = Label(frame_viewers_tools_1, text='من تاريخ')
-    # from_date_label_search.pack(side='right', padx=6)
-    
-    from_date_choose_date_search = DateEntry(frame_viewers_tools_1, dateformat='%Y-%m-%d', width=10 )
-    # from_date_choose_date_search.pack(fill='both', side='right', expand=True)
-    
-    to_date_label_search = Label(frame_viewers_tools_1, text='إلى تاريخ')
-    # to_date_label_search.pack(side='right', padx=6)
-
-    to_date_choose_date_search = DateEntry(frame_viewers_tools_1, dateformat='%Y-%m-%d', width=10)
-    # to_date_choose_date_search.pack(fill='both', side='right', expand=True)
 
 
 
@@ -634,34 +530,38 @@ def Controller_and_view_recorder_frame(master,home_img_logo):
                             columns=(0,1,2,3,4,5,6,7,8), show='headings', bootstyle='DANGER', yscrollcommand=report_scroller.set)
     controller_report_treeview.pack(fill='both', side='left', expand=True, padx=1)
 
-    report_scroller.config(command=controller_report_treeview.yview)
+    def treeview_setting():
+        'إعداد العرض الشجري'
+        # Treeview And Scrollerbar إنشاء أتصال بين 
+        report_scroller.config(command=controller_report_treeview.yview)
 
-    
-    style.configure('Treeview.Heading', font=('Times',13,'bold'))
-    style.configure('Treeview', font=('Times',12,'bold'))
-    # style.configure('Treeview', rowheight=130)
-    style.configure('TButton', font=('Times',13,'bold'))
-    style.configure('TLabel', font=('Times',12,'bold'))
-    
-    controller_report_treeview.heading(0, text='رقم الطلب', anchor='c')
-    controller_report_treeview.heading(1, text='رقم فاتورة الشحن', anchor='c')
-    controller_report_treeview.heading(2, text='السعر', anchor='c')
-    controller_report_treeview.heading(3, text='رقم جوال العميل', anchor='c')
-    controller_report_treeview.heading(4, text='أسم العميل', anchor='c')
-    controller_report_treeview.heading(5, text='أسم المندوب', anchor='c')
-    controller_report_treeview.heading(6, text='تاريخ الإضافة', anchor='c')
-    controller_report_treeview.heading(7, text='ملاحضة', anchor='c')
-    controller_report_treeview.heading(8, text='#.م', anchor='c')
-    
-    for x in range(0,9):
-        if x == 4:
-            controller_report_treeview.column(x, width=220)
-            continue
-        controller_report_treeview.column(x, stretch=False, width=120)
+        
+        style.configure('Treeview.Heading', font=('Times',13,'bold'))
+        style.configure('Treeview', font=('Times',12,'bold'))
+        # style.configure('Treeview', rowheight=130)
+        style.configure('TButton', font=('Times',13,'bold'))
+        style.configure('TLabel', font=('Times',12,'bold'))
+        
+        controller_report_treeview.heading(0, text='رقم الطلب', anchor='c')
+        controller_report_treeview.heading(1, text='رقم فاتورة الشحن', anchor='c')
+        controller_report_treeview.heading(2, text='السعر', anchor='c')
+        controller_report_treeview.heading(3, text='رقم جوال العميل', anchor='c')
+        controller_report_treeview.heading(4, text='أسم العميل', anchor='c')
+        controller_report_treeview.heading(5, text='أسم المندوب', anchor='c')
+        controller_report_treeview.heading(6, text='تاريخ الإضافة', anchor='c')
+        controller_report_treeview.heading(7, text='ملاحضة', anchor='c')
+        controller_report_treeview.heading(8, text='#.م', anchor='c')
+        
+        for x in range(0,9):
+            if x == 4:
+                controller_report_treeview.column(x, width=220)
+                continue
+            controller_report_treeview.column(x, stretch=False, width=120)
 
-    fetch_order_data('driver')
-    for x in range(0,8):
-        controller_report_treeview.column(x, anchor='center')
+
+        for x in range(0,8):
+            controller_report_treeview.column(x, anchor='center')
+    treeview_setting()
 
     frame_viewers_totals = LabelFrame(master, text='مجاميع')
     frame_viewers_totals.pack(fill='both')
@@ -728,25 +628,7 @@ def Controller_and_view_recorder_frame(master,home_img_logo):
         except requests.ConnectionError as e:
             login_username_label.after(3000, nentwork_checker)
             return False
-            
-    # print(nentwork_checker())  
-    
-    # page.after(3000, nentwork_checker)
-            # network_connection_check_l.after(3000, nentwork_checker)
-            # print(e)
 
-    # if nentwork_checker() == True:
-    #     network_connection_check_e.config(state='normal')
-    #     network_connection_check_e.delete(0, END)
-    #     network_connection_check_e.insert(0, "متصل")
-    #     network_connection_check_e.config(state='desable', bootstyle='SUCCESS')
-    # if nentwork_checker() == False:
-    #     network_connection_check_e.config(state='normal')
-    #     network_connection_check_e.delete(0, END)
-    #     network_connection_check_e.insert(0, "غير متصل")
-    #     network_connection_check_e.config(state='desable', bootstyle='DANGER')
-    
-    # nentwork_checker()
     
     def update_controller_view_items():
         'تحديث السجلات'
