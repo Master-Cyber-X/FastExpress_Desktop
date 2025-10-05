@@ -378,12 +378,12 @@ def analyzer_data_frame(master):
     for v in range(c):
         piechart_info_total_amount.grid_columnconfigure(v, weight=1)
             
-    def update_analyzer():
-        analyzer_data()
-        piechart_info.after(2000,analyzer_data())
-    update_analyzer()
+    # def update_analyzer():
+    #     analyzer_data()
+    #     piechart_info.after(2000,analyzer_data())
+    # update_analyzer()
 
-    analyzer_data()
+    # analyzer_data()
     
 
 

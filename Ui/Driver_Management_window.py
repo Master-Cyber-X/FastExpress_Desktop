@@ -5,20 +5,16 @@ from config.sys_classes import *
 #Supabase الأتصال بقاعدة البيانات
 from Data.Supa import Supa
 
-def Drivers_Managemens_window():
-        'شاشة إدارة السائقن'
-        root = Toplevel()
-        root.title('👤إدارة المناديب')
-        root.geometry('650x650+50+20')
 
-        
+def Drivers_Managemens_window():
+        'شاشة إدارة السائقن'        
         # drivers_list = SQL_DB.fetch_list_drivers_name()
         root = Toplevel()
         root.iconbitmap(sys_icon)
-        root.title('إدارة المناديب')
+        root.title('👤إدارة المناديب')
         root.geometry('700x650+300+200')
         root.wm_attributes('-topmost', True)
-        sys_class.centering_window(window=t)
+        sys_class.centering_window(window=root)
         
         f0 = LabelFrame(root, text='تحكم')
         f0.pack(fill='both')
@@ -45,15 +41,15 @@ def Drivers_Managemens_window():
         e2.pack(fill='both', )
 
         f02 = LabelFrame(f0, text='تحكم')
-        f02.pack(fill='both', side='left', padx=3, expand=True)
+        f02.pack(fill='both', side='left', padx=3)
         
         def add_new_driver():
             # SQL_DB.add_new_driver(id=e2.get(),name=e0.get(),phone=e1.get())
-            messagebox.showinfo('ملاحضة', 'تم إضافة مندوب جديد', parent=t)
-            t.focus_set()
+            messagebox.showinfo('ملاحضة', 'تم إضافة مندوب جديد', parent=root)
+            root.focus_set()
             # choose_driver_name.set(value=[])
             # choose_driver_name.configure(value=SQL_DB.fetch_list_drivers_name())
-            choose_driver_name.update()
+            # choose_driver_name.update()
             # choose_driver_name_search.configure(value=SQL_DB.fetch_list_drivers_name())
         
         b0 = Button(f02, text='➕إضافة', cursor='hand2', bootstyle='info',
@@ -69,7 +65,7 @@ def Drivers_Managemens_window():
 
 
 
-        f1 = LabelFrame(t, text='بيانات')
+        f1 = LabelFrame(root, text='بيانات')
         f1.pack(fill='both', expand=True)
 
         scroDriver = Scrollbar(f1, orient='vertical', cursor='hand2')
@@ -91,6 +87,4 @@ def Drivers_Managemens_window():
             #     view_drivers.insert('', 'end', values=(y[0],y[1],y[2],c))
         fetch_drivers_data()
         
-        t.mainloop()
-    
-
+        root.mainloop()

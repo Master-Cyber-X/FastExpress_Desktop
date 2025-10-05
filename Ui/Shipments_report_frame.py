@@ -127,7 +127,7 @@ def Shipment_viewer_report_frame(master):
     order_status_var_controller_report = StringVar()
 
     
-    choose_driver_name_search_report = ttk.Combobox(frame_viewers_tools_2, values=SQL_DB.fetch_list_drivers_name(),
+    choose_driver_name_search_report = ttk.Combobox(frame_viewers_tools_2,
         font=('Times', 12, 'bold'),  cursor='hand2', justify='center', width=13, textvariable=driver_var_controller_report)
     choose_driver_name_search_report.set(value='الكل')
     choose_driver_name_search_report.pack(side='right')

@@ -54,25 +54,25 @@ def Collection_money__full_report_frame(master):
         # try:
             "جلب تقارير التحصيل"
             report_treeview.delete(*report_treeview.get_children())
-            datalist = SQL_DB.fetch_collection_money_report(driver,from_date=from_date_choose_date_search.entry.get(),to_date=to_date_choose_date_search.entry.get())
-            countLine = 0
-            if datalist == []:
-                return
-            if options == 'EXPORT':
-                ask_file = filedialog.asksaveasfilename(initialfile='Collection Report', defaultextension='xlsx')
-                if ask_file == '':
-                    return
-                # export_datalist_xlsx(dataList=datalist, output_path=ask_file)
-                messagebox.showinfo('ملاحضة', 'تم الحفظ', parent=master)
-                return
-            for x in datalist[0]:
-                countLine +=1
-                report_treeview.insert('','end', values=(x[0],x[3],f"{x[7]:,.2f}",x[2],x[6],x[5],x[8],(x[12],x[13]),x[9],countLine))
-            report_treeview.yview_moveto(1)
-            total_entry.delete(0, END)
-            total_entry.insert(0, datalist[2])
-            total_orders_entry.delete(0, END)
-            total_orders_entry.insert(0, datalist[1])
+            # datalist = SQL_DB.fetch_collection_money_report(driver,from_date=from_date_choose_date_search.entry.get(),to_date=to_date_choose_date_search.entry.get())
+            # countLine = 0
+            # if datalist == []:
+            #     return
+            # if options == 'EXPORT':
+            #     ask_file = filedialog.asksaveasfilename(initialfile='Collection Report', defaultextension='xlsx')
+            #     if ask_file == '':
+            #         return
+            #     # export_datalist_xlsx(dataList=datalist, output_path=ask_file)
+            #     messagebox.showinfo('ملاحضة', 'تم الحفظ', parent=master)
+            #     return
+            # for x in datalist[0]:
+            #     countLine +=1
+            #     report_treeview.insert('','end', values=(x[0],x[3],f"{x[7]:,.2f}",x[2],x[6],x[5],x[8],(x[12],x[13]),x[9],countLine))
+            # report_treeview.yview_moveto(1)
+            # total_entry.delete(0, END)
+            # total_entry.insert(0, datalist[2])
+            # total_orders_entry.delete(0, END)
+            # total_orders_entry.insert(0, datalist[1])
         # except :
         #     pass
 
@@ -140,7 +140,7 @@ def Collection_money__full_report_frame(master):
     order_status_var_controller_report = StringVar()
 
     
-    choose_driver_name_search_report = ttk.Combobox(frame_viewers_tools_1, values=SQL_DB.fetch_list_drivers_name(),
+    choose_driver_name_search_report = ttk.Combobox(frame_viewers_tools_1,
         font=('Times', 12, 'bold'),  cursor='hand2', justify='center', width=9, textvariable=driver_var_controller_report)
     choose_driver_name_search_report.set(value='الكل')
     choose_driver_name_search_report.pack(side='right')

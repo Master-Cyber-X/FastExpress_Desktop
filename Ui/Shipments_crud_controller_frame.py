@@ -5,6 +5,10 @@ from config.sys_classes import *
 #Supabase الأتصال بقاعدة البيانات
 from Data.Supa import Supa
 
+# نافذه إدارة المناديب
+from Ui.Driver_Management_window import Drivers_Managemens_window
+# from ..Ui.Driver_Management import Drivers_Managemens_window
+
 
 
 
@@ -93,7 +97,7 @@ def Controller_and_view_recorder_frame(master,home_img_logo):
     my_menu_bar.pack(fill='both', pady=5)
 
     file_menu = Menu(my_menu_bar, cursor='hand2')
-    file_menu.add_radiobutton(label='👥 المناديب', command=drivers_manager)
+    file_menu.add_radiobutton(label='👥 المناديب', command=lambda:Drivers_Managemens_window())
     file_menu.add_separator()
     file_menu.add_radiobutton(label='🔄تغير الثيم', command=change_theme)
     # file_menu.add_separator()

@@ -51,30 +51,31 @@ def Track_drivers_frame(master):
 
 
     def fetch_order_data_reports(driver):
-        try:
-            "Fetch data for items"
-            report_collection_treeview.delete(*report_collection_treeview.get_children())
-            from_date = from_date_choose_date_search.entry.get()
-            to_date = to_date_choose_date_search.entry.get()
-            datalist = SQL_DB.fetch_collection_money_report_summary(driver,
-                from_date=from_date,
-                to_date=to_date
-                )
+        pass
+        # try:
+        #     "Fetch data for items"
+        #     report_collection_treeview.delete(*report_collection_treeview.get_children())
+        #     from_date = from_date_choose_date_search.entry.get()
+        #     to_date = to_date_choose_date_search.entry.get()
+        #     datalist = SQL_DB.fetch_collection_money_report_summary(driver,
+        #         from_date=from_date,
+        #         to_date=to_date
+        #         )
             
-            countLine = 0
-            report_collection_treeview.yview_moveto(1)
-            total_orders_entry.delete(0, END)
-            total_orders_entry.insert(0, datalist[2])
-            total_entry.delete(0, END)
-            total_entry.insert(0, datalist[1])
-            if datalist == []:
-                return
-            for x in datalist[0]:
-                countLine +=1
-                report_collection_treeview.insert('','end', values=(x[1],x[2],x[0], to_date,from_date ,x[3]))
+        #     countLine = 0
+        #     report_collection_treeview.yview_moveto(1)
+        #     total_orders_entry.delete(0, END)
+        #     total_orders_entry.insert(0, datalist[2])
+        #     total_entry.delete(0, END)
+        #     total_entry.insert(0, datalist[1])
+        #     if datalist == []:
+        #         return
+        #     for x in datalist[0]:
+        #         countLine +=1
+        #         report_collection_treeview.insert('','end', values=(x[1],x[2],x[0], to_date,from_date ,x[3]))
             
-        except Exception as e:
-            messagebox.showerror('ملاحضة', f'Error : {e}', parent=master)
+        # except Exception as e:
+        #     messagebox.showerror('ملاحضة', f'Error : {e}', parent=master)
 
 
 
@@ -127,7 +128,7 @@ def Track_drivers_frame(master):
     driver_var_controller_report = StringVar()
 
     
-    choose_driver_name_search_report = ttk.Combobox(frame_viewers_tools_2, values=SQL_DB.fetch_list_drivers_name(),
+    choose_driver_name_search_report = ttk.Combobox(frame_viewers_tools_2, 
         font=('Times', 12, 'bold'),  cursor='hand2', justify='center', width=13, textvariable=driver_var_controller_report)
     choose_driver_name_search_report.set(value='الكل')
     choose_driver_name_search_report.pack(side='right')
