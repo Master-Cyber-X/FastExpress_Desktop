@@ -271,7 +271,6 @@ def Controller_and_view_recorder_frame(master,home_img_logo):
                 messagebox.showerror('ملاحضة', f'تأكد من إتصالك باالإنترنت ثم عاود المحاولة :{e}', parent=master)
                 return
             messagebox.showinfo('ملاحضة', f'تم تسجيل فاتورة جديدة {int(Supa.generate_order_serial())-1}', parent=master)
-
         add_new_order_supabase()
 
         def update_widgets():
@@ -298,6 +297,8 @@ def Controller_and_view_recorder_frame(master,home_img_logo):
             customer_street_entry.delete(0, END)
             order_id_in_store_entry.delete(0, END)
             nots_entry.delete(0, END)
+            fetch_order_data(driver=choose_driver_name_search.get())
+            
         update_widgets()
         
         # messagebox.showinfo('ملاحضة', f'تم تسجيل فاتورة جديدة {int(SQL_DB.generate_order_serial())-1}')
@@ -558,13 +559,13 @@ def Controller_and_view_recorder_frame(master,home_img_logo):
         
         for x in range(0,9):
             if x == 4:
-                controller_report_treeview.column(x, width=220)
+                controller_report_treeview.column(x, width=220, anchor='ne')
                 continue
             controller_report_treeview.column(x, stretch=False, width=120)
 
 
-        for x in range(0,8):
-            controller_report_treeview.column(x, anchor='center')
+        # for x in range(0,8):
+        #     controller_report_treeview.column(x, anchor='center')
     treeview_setting()
 
     frame_viewers_totals = LabelFrame(master, text='مجاميع')
@@ -636,6 +637,6 @@ def Controller_and_view_recorder_frame(master,home_img_logo):
     
     def update_controller_view_items():
         'تحديث السجلات'
-        fetch_order_data(driver=choose_driver_name_search.get())
 
-    # fetch_order_data(driver='الكل')
+    
+    fetch_order_data(driver=choose_driver_name_search.get())

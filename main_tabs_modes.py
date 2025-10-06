@@ -12,8 +12,6 @@ from Ui.Drivers_report_collections_assignments_return_shipment_frame import Driv
 from Ui.Data_analyzer_frame import analyzer_data_frame
 from Ui.Track_drivers_frame import Track_drivers_frame
 
-# الأتصال بقاعدة البيانات
-# from Data.SQILite import SQL_DB
 
 def MyApp(user):
     'Edit from desktop pc al saif'

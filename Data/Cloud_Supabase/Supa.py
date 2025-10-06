@@ -82,31 +82,34 @@ class Supa:
         report = supabase.table('actualbase').select('*').order('id_serial', desc=False).execute()
         for x in report.data:
             count +=1
-            datalist.append((x['id_serial'],x['order_id_shipment'],f'{float(x['price']):,.2f}',x['order_status'],x['customer_phone'],x['customer_name'],x['driver'],(x['date_creation'],x['time_creation']),x['notes'],count))
+            datalist.append((x['id_serial'],x['order_id_shipment'],f'{float(x['delivery_cost_price']):,.2f}',x['order_status'],x['customer_phone'],x['customer_name'],x['driver'],(x['date_creation'],x['time_creation']),x['note'],count))
         return datalist
     
 
+
+
+
     def fetch_order_data(driver):
-        driver=driver
         'تقوم بإرجاع السجلات التي تحت المعالجة مثل المرتجع و الشحنات مع المناديب'
         'بيانات تقرير التحصيلات'
         # try:
+        driver=driver
 
-        report = supabase.table('actualbase').select('*').eq('driver',driver).execute()
+        report = supabase.table('Consignments_management').select('*').eq('driver',driver).execute()
         
         'تقوم بإرجاع التقرير المطلوب'
         if driver =='الكل' or driver =='':
-            report = supabase.table('actualbase').select('*').execute()
+            report = supabase.table('Consignments_management').select('*').execute()
         
         count = 0
         datalist = []
         for x in report.data:
             count +=1
-            datalist.append((x['id_serial'],x['order_id_shipment'],f'{float(x['price']):,.2f}',x['customer_phone'],x['customer_name'],x['driver'],(x['date_creation'],x['time_creation']),x['notes'],count))
+            datalist.append((x['id_serial'],x['order_id_shipment'],f'{float(x['delivery_cost_price']):,.2f}',x['customer_phone'],x['customer_name'],x['driver'],(x['date_creation'],x['time_creation']),x['note'],count))
         return datalist
     
     def delete_recorder(serial):
-        supabase.table('actualbase').delete().eq('id_serial',serial).execute()
+        supabase.table('Consignments_management').delete().eq('id_serial',serial).execute()
 
         # collection_count = cur.execute(f'SELECT COUNT(PRICE) FROM ActualBase WHERE driver ="{driver}" AND order_status =="تم التسليم" AND date_end BETWEEN  "{from_date}" AND "{to_date}"').fetchall()[0][0]
         # collection_sum = f"ريال {cur.execute(f'SELECT SUM(PRICE) FROM ActualBase WHERE driver = "{driver}" AND order_status =="تم التسليم" AND date_end BETWEEN  "{from_date}" AND "{to_date}"').fetchall()[0][0]:,.2f}"
