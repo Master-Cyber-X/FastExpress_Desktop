@@ -2,8 +2,6 @@
 from config.Libaries import *
 # إستدعاء إعدادات النظام
 from config.sys_classes import *
-#Supabase الأتصال بقاعدة البيانات
-from Data.Supa import Supa
 
 # # تحميل ملف الترجمة
 # from config.Translations import translations

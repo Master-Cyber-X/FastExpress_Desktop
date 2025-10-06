@@ -15,7 +15,7 @@ class Supa:
     'Supabase class for crud sql queires| التعامل مع الإستظافة'
     def generate_order_serial():
         'supabase'
-        id = supabase.table('actualbase').select('id_serial').order('id_serial', desc=True).execute()
+        id = supabase.table('Consignments_management').select('id_serial').order('id_serial', desc=True).execute()
         serial = 0
         ls = []
         for x in id.data:
@@ -28,35 +28,36 @@ class Supa:
         
 
     # Supa للتعامل مع قاعدة بيانات  
-    def build_table_cloude_Supa():
+    def build_table_cloud_Supa():
         pass
 
-    def add_new_order(price,customer_name,customer_phone,
-                    notes,payment_type,order_id_shipment,driver,payment_status,
-                    order_status):
+    def add_delivery_order(price,customer_name,customer_phone,
+                    notes,order_id_shipment,driver,
+                    customer_location,customer_street):
+        'إضافة طلب توصيل جديدة'
         
-        # إضافة فاتورة توصيل جديدة
         try:
             date= strftime('%Y-%m-%d')
             time = strftime('%H:%M:%S')
             serial = Supa.generate_order_serial()
             data = {
                 'id_serial':serial,
-                'payment_status':payment_status,
-                'order_status':order_status,
-                'order_id_shipment':order_id_shipment,
-                'payment_type':payment_type,
                 'customer_name':customer_name,
                 'customer_phone':customer_phone,
-                'price':price,
+                'delivery_cost_price':price,
                 'driver':driver,
-                'notes':notes,
                 'date_creation':date,
                 'time_creation':time,
                 'date_end':'Null',
-                'time_end':'Null'
+                'time_end':'Null',
+                'customer_location':customer_location,
+                'customer_street':customer_street,
+                'order_id_shipment':order_id_shipment,
+                'note':notes,
+                'order_status':'إنتظار الإلتقاط',
                 }
-            supabase.table('actualbase').insert(data).execute()
+            # إدخال بيانات الشحنة الجديدة
+            supabase.table('Consignments_management').insert([data]).execute()
         except ConnectionError as e:
                 messagebox.showerror('ملاحضة', f'تأكد من إتصالك باالإنترنت ثم عاود المحاولة :{e}')
         except Exception as e:

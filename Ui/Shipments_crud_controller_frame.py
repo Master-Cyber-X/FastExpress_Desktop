@@ -3,7 +3,7 @@ from config.Libaries import *
 # إستدعاء إعدادات النظام
 from config.sys_classes import *
 #Supabase الأتصال بقاعدة البيانات
-from Data.Supa import Supa
+from Data.Cloud_Supabase.Supa import Supa
 
 # نافذه إدارة المناديب
 from Ui.Driver_Management_window import Drivers_Managemens_window
@@ -253,15 +253,14 @@ def Controller_and_view_recorder_frame(master,home_img_logo):
         def add_new_order_supabase():
             'supabase إدخال البيانات إلى قاعدة بيانات'
             try:
-                Supa.add_new_order(
+                Supa.add_delivery_order(
                     price=price_of_customer_order_entry.get(),
                     customer_name=customer_name.get(),
                     customer_phone=customer_entry_phone.get(),
                     driver=choose_driver_name.get(),
-                    payment_status='غير مدفوعة',
                     customer_location=customer_location_entry.get(),
+                    customer_street=customer_street_entry.get(),
                     order_id_shipment=order_id_in_store_entry.get(),
-                    order_status='جاري التوصيل',
                     notes=nots_entry.get()
                 )
             except ConnectionError as e:
@@ -271,6 +270,8 @@ def Controller_and_view_recorder_frame(master,home_img_logo):
             except Exception as e:
                 messagebox.showerror('ملاحضة', f'تأكد من إتصالك باالإنترنت ثم عاود المحاولة :{e}', parent=master)
                 return
+            messagebox.showinfo('ملاحضة', f'تم تسجيل فاتورة جديدة {int(Supa.generate_order_serial())-1}', parent=master)
+
         add_new_order_supabase()
 
         def update_widgets():
@@ -294,13 +295,12 @@ def Controller_and_view_recorder_frame(master,home_img_logo):
             customer_entry_phone.delete(0, END)
             choose_driver_name.set('غير معرف')
             customer_location_entry.delete(0, END)
+            customer_street_entry.delete(0, END)
             order_id_in_store_entry.delete(0, END)
             nots_entry.delete(0, END)
         update_widgets()
         
         # messagebox.showinfo('ملاحضة', f'تم تسجيل فاتورة جديدة {int(SQL_DB.generate_order_serial())-1}')
-        messagebox.showinfo('ملاحضة', f'تم تسجيل فاتورة جديدة {int(Supa.generate_order_serial())-1}', parent=master)
-
 
     
 
