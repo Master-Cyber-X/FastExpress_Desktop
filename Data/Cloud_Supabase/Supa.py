@@ -95,11 +95,11 @@ class Supa:
         # try:
         driver=driver
 
-        report = supabase.table('Consignments_management').select('*').eq('driver',driver).execute()
+        report = supabase.table('Consignments_management').select('*').order('id_serial', desc=False).eq('driver',driver).execute()
         
         'تقوم بإرجاع التقرير المطلوب'
         if driver =='الكل' or driver =='':
-            report = supabase.table('Consignments_management').select('*').execute()
+            report = supabase.table('Consignments_management').select('*').order('id_serial', desc=False).execute()
         
         count = 0
         datalist = []

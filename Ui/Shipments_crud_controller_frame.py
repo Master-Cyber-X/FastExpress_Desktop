@@ -561,6 +561,9 @@ def Controller_and_view_recorder_frame(master,home_img_logo):
             if x == 4:
                 controller_report_treeview.column(x, width=220, anchor='ne')
                 continue
+            if x == 1:
+                controller_report_treeview.column(x, width=60)
+                continue
             controller_report_treeview.column(x, stretch=False, width=120)
 
 
