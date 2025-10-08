@@ -1,113 +1,99 @@
-from config.sys_classes import sys_class
+from ttkbootstrap import Window, Frame, Label
 from config.Libaries import *
-import matplotlib.pyplot as pt
-from matplotlib.figure import Figure
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+
+root = Window(themename='cyborg')
+root.title('Details')
+root.geometry('1450x850+200+50')
+
+scrf = ScrolledFrame(root, bootstyle='secondray')
+scrf.pack(fill='both', expand=True)
+
+# إعدادات ال
+py = 10
+px = 10
+pxv = 30
 
 
-# a = Window(themename='cyborg')
-# a.geometry('650x650')
-# a.title('Map')
+def shipment_details():
+    'تفاصيل الشحنة'
+    f0 = LabelFrame(scrf, text='تفاصيل الشحنة', bootstyle='danger')
+    f0.pack(fill='both', padx=10, pady=4)
 
+    f00 = Frame(f0, )
+    f00.pack(fill='both', side='right')
 
-# def test():
-#     d = sys_class.extract_street_or_pluscode(e.get())
-#     l.configure(text=d)
+    l00 = Label(f00, text=':رقم الشحنة', font=('Times',15,'bold'))
+    l00.pack(pady=10)
 
-# e = Entry(a, )
-# e.pack()
+    l01 = Label(f00, text='JED-RYD-90304697', font=('Times',13,'bold'))
+    l01.pack(pady=4)
 
-# l = Label()
-# l.pack()
+    l02 = Label(f00, text='عدد الطرود', font=('Times',15,'bold'))
+    l02.pack(pady=10)
 
-# b = Button(a, text='GO', cursor='hand2', command=test)
-# b.pack()
+    l03 = Label(f00, text='4', font=('Times',13,'bold'))
+    l03.pack(pady=10)
 
-# a.mainloop()
+    l04 = Label(f00, text='السعر', font=('Times',15,'bold'))
+    l04.pack(pady=10)
 
-from tkinter import *
-from ttkbootstrap import Window
-from matplotlib.figure import Figure
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+    l05 = Label(f00, text='230.00', font=('Times',13,'bold'))
+    l05.pack(pady=4, padx=10)
 
-# إنشاء النافذة
-a = Window(themename='cyborg')
-a.geometry('800x600')
-a.title('Map')
+    l06 = Label(f00, text='الوجهه', font=('Times',15,'bold'))
+    l06.pack(pady=10)
 
-canvas_widget = None
-fig = None
-plot1 = None
+    l07 = Label(f00, text='RIDHUB', font=('Times',13,'bold'))
+    l07.pack(pady=4, padx=10)
 
-# دالة لإنشاء أو تحديث مخطط الأعمدة
-def draw_chart():
-    global canvas_widget, fig, plot1
-
-    # البيانات
-    x = ['A', 'B', 'C', 'D']
-    try:
-        y = [101, 211, 30, int(e.get())]  # القيمة من الإدخال
-    except:
-        y = [101, 21, 30, 20]  # قيمة افتراضية في حال الإدخال غير صالح
-
-    # حذف الرسم السابق
-    if canvas_widget is not None:
-        canvas_widget.get_tk_widget().destroy()
-
-    # إنشاء الشكل بخلفية سوداء
-    fig = Figure(figsize=(5, 6), dpi=100, facecolor='black')
-    plot1 = fig.add_subplot(111, facecolor='black')
-
-    # رسم الأعمدة
-    colors = ['cyan', 'magenta', 'yellow', 'lime']
-    plot1.bar(x, y, color=colors, width=0.6, edgecolor='white')
-
-    # تزيين الرسم
-    plot1.set_title('Sales Data (Bar Chart)', color='white', fontsize=14)
-    plot1.set_xlabel('Category', color='white')
-    plot1.set_ylabel('Value', color='white')
-    plot1.tick_params(colors='white')
-    for spine in plot1.spines.values():
-        spine.set_color('white')
-
-    # عرض القيم فوق الأعمدة
-    for i, v in enumerate(y):
-        plot1.text(i, v + 2, str(v), color='white', ha='center', fontsize=10)
-
-    # ربط الشكل بـ tkinter
-    canvas = FigureCanvasTkAgg(fig, master=frame)
-    canvas.draw()
-    canvas_widget = canvas
-    canvas.get_tk_widget().pack(fill=BOTH, expand=True)
-# دالة لتحديث الحجم تلقائيًا
-def on_resize(event):
-    if canvas_widget is not None:
-        canvas_widget.get_tk_widget().config(width=event.width, height=event.height)
-        # draw_chart()
+# shipment_details()
 
 
 
 
+def sender_details():
+    'تفاصيل المرسل'
+    
+    b = LabelFrame(scrf, text='بيانات المرسل', bootstyle='danger')
+    b.pack(fill='both', padx=px, pady=py)
+    
+    
+    f00 = Frame(b)  # SubFrame> # SubFrame
+    f00.pack(fill='both')
+    l00 = Label(f00, text='أسم المرسل', font=('Times',15,'bold'))
+    l00.pack( padx=px, pady=py, side='right')
+
+    f01 = Frame(b)  # SubFrame> # SubFrame
+    f01.pack(fill='both')
+    l01 = Label(f01, text='محمد حسن عبدالعزيز الفالحي', font=('Times',13,'bold'))
+    l01.pack( padx=pxv, pady=py, side='right')
 
 
-# عناصر الواجهة
-top_frame = Frame(a)
-top_frame.pack(fill=X, pady=10)
 
-Label(top_frame, text='أدخل رقمًا لتحديث آخر عمود:', font=('Arial', 10)).pack(side=LEFT, padx=5)
-e = Entry(top_frame, width=10)
-e.pack(side=LEFT, padx=10)
 
-b = Button(top_frame, text='عرض الرسم', cursor='hand2', command=draw_chart)
-b.pack(side=LEFT, padx=10)
+    f02 = Frame(b)  # SubFrame> # SubFrame
+    f02.pack(fill='both')
+    l02 = Label(f02, text=':رقم المرسل', font=('Times',15,'bold'))
+    l02.pack(padx=px, pady=py, side='right')
 
-# إطار الرسم
-frame = Frame(a)
-frame.pack(fill=BOTH, expand=True, padx=10, pady=10)
+    f03 = Frame(b)
+    f03.pack(fill='both')
+    l03 = Label(f03, text='0587675676', font=('Times',13,'bold'))
+    l03.pack(padx=pxv, pady=py, side='right')
 
-# تحديث الرسم عند تغيير الحجم
-a.bind("<Configure>", on_resize)
 
-# تشغيل التطبيق
-a.mainloop()
+    f04 = Frame(b)
+    f04.pack(fill='both')
+    l04 = Label(f00, text='المدينة', font=('Times',15,'bold'))
+    l04.pack(padx=px, pady=py, side='right')
 
+    f05 = Frame(b)
+    f05.pack(fill='both')
+    l05 = Label(f00, text='RIDHUB', font=('Times',13,'bold'))
+    l05.pack(padx=pxv, pady=py, side='right')
+
+# shipment_details()
+
+sender_details()
+
+root.mainloop()
