@@ -6,9 +6,7 @@ from config.sys_classes import *
 # # تحميل ملف الترجمة
 # from config.Translations import translations
 
-# lang = 'ar'
-# def tra(key):
-#      return translations[lang].get(key,key) 
+
 
 def Drivers_Managemens_window():
         'شاشة إدارة السائقن'        
@@ -48,9 +46,10 @@ def Drivers_Managemens_window():
         f02.pack(fill='both', side='left', padx=3)
         
         def add_new_driver():
-            # SQL_DB.add_new_driver(id=e2.get(),name=e0.get(),phone=e1.get())
+            Supa.add_new_driver(id_serial=random.randint(0,121), name=e0.get(),phone=e1.get(),id=e2.get())
             messagebox.showinfo('ملاحضة', 'تم إضافة مندوب جديد', parent=root)
             root.focus_set()
+            # messagebox.showinfo(parent=root, title='ملاحضة', message='تم الإضافة')
             # choose_driver_name.set(value=[])
             # choose_driver_name.configure(value=SQL_DB.fetch_list_drivers_name())
             # choose_driver_name.update()

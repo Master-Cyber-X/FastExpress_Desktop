@@ -5,18 +5,18 @@ from config.Libaries import *
 from config.sys_classes import *
 
 # إستدعاء واجهات رسومية
-from Ui.Shipments_crud_controller_frame import Controller_and_view_recorder_frame
-from Ui.Shipments_report_frame import Shipment_viewer_report_frame
-from Ui.Shipments_collection_full_report_frame import Collection_money__full_report_frame
-from Ui.Drivers_report_collections_assignments_return_shipment_frame import Drivers_report_collections_asaginment_back_shipment_frame
-from Ui.Data_analyzer_frame import analyzer_data_frame
-from Ui.Track_drivers_frame import Track_drivers_frame
+from Ui.Consignmets_Report_Module.Shipments_crud_controller_frame import Controller_and_view_recorder_frame
+from Ui.Consignmets_Report_Module.Shipments_report_frame import Shipment_viewer_report_frame
+from Ui.Consignmets_Report_Module.Shipments_collection_full_report_frame import Collection_money__full_report_frame
+from Ui.Drivers_module.Drivers_report_collections_assignments_return_shipment_frame import Drivers_report_collections_asaginment_back_shipment_frame
+from Ui.statistics.Data_analyzer_frame import analyzer_data_frame
+from Ui.Drivers_module.tab_track import Track_drivers_tab
 
 
 def MyApp(user):
     'تشغيل الظام'
     # page = tb.Window(themename=SQL_DB.get_theme())
-    page = tb.Window(themename='CustomTheme')
+    page = tb.Window(themename='cyborg')
     page.title('سريع إكسبريس')
     page.geometry('1610x980+160+0')
     # توسيط الواجهه في نص شاشة الكمبوتبر
@@ -51,7 +51,7 @@ def MyApp(user):
     
     # شاشة التببع 
     tracke_drivers_and_orders = Frame(note_book)
-    Track_drivers_frame(master=tracke_drivers_and_orders)
+    Track_drivers_tab(master=tracke_drivers_and_orders)
     
     # تحليل البيانات
     data_analyzer = Frame(note_book)
@@ -64,6 +64,7 @@ def MyApp(user):
     note_book.add(drivers_collections_report, text='👤تقرير المناديب')
     note_book.add(tracke_drivers_and_orders, text='📍 شاشة التتبع')
     note_book.add(data_analyzer, text='📊 تحليل البيانات')
+    
     page.mainloop()
     
 

@@ -7,7 +7,7 @@ root = Window(themename='CustomTheme')
 root.title('Details')
 root.geometry('1450x850+200+50')
 
-sar_img = ImageTk.PhotoImage(Image.open(r'C:\Users\Exp\Downloads\Saudi_Riyal_Symbol.png').resize((15,15)))
+sar_img = ImageTk.PhotoImage(Image.open(r'Assets\Img\Saudi_Riyal_Symbol.png').resize((15,15)))
 
 
 
@@ -19,7 +19,7 @@ py = 10
 px = 10
 pxv = 30
 
-head_ft = font=('Times',20,'bold') # Head Title Font
+head_ft = font=('Times',18,'bold') # Head Title Font
 val_ft = font=('Times',13,'bold')  # Value Title Font
 
 

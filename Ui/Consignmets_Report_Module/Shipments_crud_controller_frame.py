@@ -6,7 +6,7 @@ from config.sys_classes import *
 from Data.Cloud_Supabase.Supa import Supa
 
 # نافذه إدارة المناديب
-from Ui.Driver_Management_window import Drivers_Managemens_window
+from Ui.Drivers_module.Driver_Management_window import Drivers_Managemens_window
 # from ..Ui.Driver_Management import Drivers_Managemens_window
 
 

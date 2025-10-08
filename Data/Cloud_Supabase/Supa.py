@@ -87,8 +87,6 @@ class Supa:
     
 
 
-
-
     def fetch_order_data(driver):
         'تقوم بإرجاع السجلات التي تحت المعالجة مثل المرتجع و الشحنات مع المناديب'
         'بيانات تقرير التحصيلات'
@@ -119,3 +117,25 @@ class Supa:
             
             # return cur.execute(f'SELECT * FROM ActualBase WHERE driver ="{driver}" AND order_status =="تم التسليم" AND date_end BETWEEN  "{from_date}" AND "{to_date}"').fetchall(), '0','0.00 ريال'
 
+
+    def add_new_driver(id_serial,name,phone,id):
+        'إضافة مندوب جديد'
+        supabase.table('Drivers_Management').insert({'id_serial':id_serial,'name':name,'phone':phone,'id_number':id}).execute()
+
+    def get_driver_list():
+        'جلب بيانات الناديب'
+        data = supabase.table('Drivers_Management').select('id_serial,name').order('id_serial', desc=False).execute().data
+        dataList = []
+        for x in data:
+            dataList.append((x['id_serial'],x['name']))
+        return dataList
+
+    def get_order_list():
+        'جلب بيانات الشحنات'
+        data = supabase.table('Consignments_management').select('*').eq('driver','مرغني').order('id_serial', desc=False).execute().data
+        count = 0
+        datalist = []
+        for x in data:
+            count +=1
+            datalist.append((x['id_serial'],x['order_id_shipment'],f'{float(x['delivery_cost_price']):,.2f}',x['customer_phone'],x['customer_name'],x['driver'],(x['date_creation'],x['time_creation']),x['note'],count))
+        return datalist

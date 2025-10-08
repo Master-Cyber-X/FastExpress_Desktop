@@ -52,6 +52,7 @@ import qrcode
 
 # Database Connections Supa.
 from supabase import create_client, Client # type: ignore
+from Data.Cloud_Supabase.Supa import Supa
 
 # الأتصال بقاعدة البيانات
 # from Data.SQILite import SQL_DB

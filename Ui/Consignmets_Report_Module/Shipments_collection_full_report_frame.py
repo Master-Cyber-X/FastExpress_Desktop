@@ -238,8 +238,3 @@ def Collection_money__full_report_frame(master):
 
 
     # fetch_order_data_reports(driver='الكل', options='VIEW')
-
-
-
-
-
