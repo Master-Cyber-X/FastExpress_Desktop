@@ -79,8 +79,10 @@ def Drivers_Managemens_window():
         scroDriver = Scrollbar(f1, orient='vertical', cursor='hand2')
         scroDriver.pack(fill='both', side='right')
 
-        view_drivers = Treeview(f1, show='headings', columns=(0,1,2,3,4), cursor='hand2')
+        view_drivers = Treeview(f1, show='headings', columns=(0,1,2,3,4), cursor='hand2', yscrollcommand=scroDriver.set)
         view_drivers.pack(fill='both', side='left', expand=True)
+
+        scroDriver.config(command=view_drivers.yview)
         
         view_drivers.heading(0, text='رقم الهوية')
         view_drivers.heading(1, text='رقم الجوال')

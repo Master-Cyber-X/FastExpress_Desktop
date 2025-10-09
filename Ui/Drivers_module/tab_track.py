@@ -14,7 +14,7 @@ def Track_drivers_tab(master):
     # شاشة التببع 
     tracke_drivers_and_orders = Frame(note_book)
     Track_drivers_frame(master=tracke_drivers_and_orders)
-    note_book.add(tracke_drivers_and_orders, text='📍 شاشة التتبع')
+    note_book.add(tracke_drivers_and_orders, text='📍 تتبع المناديب')
     
     # شاشة بيانات الشحنات 
     view_order_details_frames = Frame(note_book)

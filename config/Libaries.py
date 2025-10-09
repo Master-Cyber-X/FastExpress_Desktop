@@ -3,6 +3,7 @@ from tkinter import *
 import tkinter as tk
 import ttkbootstrap as tb
 import ttkbootstrap
+from tkintermapview import TkinterMapView
 from ttkbootstrap.scrolled import ScrolledFrame
 from ttkbootstrap.toast import ToastNotification
 from ttkbootstrap import *

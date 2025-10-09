@@ -3,6 +3,7 @@ from config.Libaries import *
 # إستدعاء إعدادات النظام
 from config.sys_classes import *
 
+from Ui.Drivers_module.GPS_view_frame import map_view
 
 def Track_drivers_frame(master):
 
@@ -22,11 +23,12 @@ def Track_drivers_frame(master):
     driver_treeview.heading(2, text='م.#')
     driver_treeview.heading(1, text='أسم المندوب')
     driver_treeview.heading(0, text='رقم الراتب')
+    
 
 
 
     for x in range(0,2):
-        driver_treeview.column(x, anchor='center')
+        driver_treeview.column(x, anchor='center', width=50)
     
     c = 0
     for s in Supa.get_driver_list():
@@ -37,9 +39,17 @@ def Track_drivers_frame(master):
 
 
 #############################################################################################################################################
+    # عرض موقع المندوب على الخريطة
+
+    drivers_view_in_map_frame = LabelFrame(master, text='خرائط')
+    drivers_view_in_map_frame.pack(fill='both', side='left', expand=True)
+    map_view(master=drivers_view_in_map_frame)
+
+#############################################################################################################################################
     # عرض المهام المعلقة
     
-    drivers_list_panding_consignments = LabelFrame(master, text='الشحنات')
+
+    drivers_list_panding_consignments = LabelFrame(drivers_view_in_map_frame, text='المهام')
     drivers_list_panding_consignments.pack(fill='both', side='left', expand=True)
     
 

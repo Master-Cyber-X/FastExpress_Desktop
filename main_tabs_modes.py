@@ -3,7 +3,7 @@ from config.Libaries import *
 
 # إستدعاء إعدادات النظام
 from config.sys_classes import *
-
+    
 # إستدعاء واجهات رسومية
 from Ui.Consignmets_Report_Module.Shipments_crud_controller_frame import Controller_and_view_recorder_frame
 from Ui.Consignmets_Report_Module.Shipments_report_frame import Shipment_viewer_report_frame
