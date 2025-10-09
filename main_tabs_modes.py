@@ -18,7 +18,7 @@ def MyApp(user):
     # page = tb.Window(themename=SQL_DB.get_theme())
     page = tb.Window(themename='cyborg')
     page.title('سريع إكسبريس')
-    page.geometry('1610x980+160+0')
+    page.geometry('1610x920+160+0')
     # توسيط الواجهه في نص شاشة الكمبوتبر
     sys_class.centering_window(window=page)
     page.iconbitmap(sys_icon)

@@ -14,7 +14,7 @@ def Drivers_Managemens_window():
         root = Toplevel()
         root.iconbitmap(sys_icon)
         root.title('👤إدارة المناديب')
-        root.geometry('700x650+300+200')
+        root.geometry('1000x650+300+200')
         root.wm_attributes('-topmost', True)
         sys_class.centering_window(window=root)
         
@@ -48,12 +48,17 @@ def Drivers_Managemens_window():
         def add_new_driver():
             Supa.add_new_driver(id_serial=random.randint(0,121), name=e0.get(),phone=e1.get(),id=e2.get())
             messagebox.showinfo('ملاحضة', 'تم إضافة مندوب جديد', parent=root)
-            root.focus_set()
-            # messagebox.showinfo(parent=root, title='ملاحضة', message='تم الإضافة')
-            # choose_driver_name.set(value=[])
-            # choose_driver_name.configure(value=SQL_DB.fetch_list_drivers_name())
-            # choose_driver_name.update()
-            # choose_driver_name_search.configure(value=SQL_DB.fetch_list_drivers_name())
+            
+            # تنظيف الحقول
+            e2.delete(0, END)
+            e1.delete(0, END)
+            e0.delete(0, END)
+            view_drivers.yview(1)
+
+            
+            fetch_drivers_data()
+
+
         
         b0 = Button(f02, text='➕إضافة', cursor='hand2', bootstyle='info', width=24,
                     command=add_new_driver)
@@ -74,20 +79,22 @@ def Drivers_Managemens_window():
         scroDriver = Scrollbar(f1, orient='vertical', cursor='hand2')
         scroDriver.pack(fill='both', side='right')
 
-        view_drivers = Treeview(f1, show='headings', columns=(0,1,2,3), cursor='hand2')
+        view_drivers = Treeview(f1, show='headings', columns=(0,1,2,3,4), cursor='hand2')
         view_drivers.pack(fill='both', side='left', expand=True)
         
         view_drivers.heading(0, text='رقم الهوية')
         view_drivers.heading(1, text='رقم الجوال')
         view_drivers.heading(2, text='الاسم')
-        view_drivers.heading(3, text='#.م')
+        view_drivers.heading(3, text='رقم الراتب')
+        view_drivers.heading(4, text='#.م')
         
         def fetch_drivers_data():
             view_drivers.delete(*view_drivers.get_children())
             c = 0
-            # for y in SQL_DB.fetch_drivers_data():
-            #     c+=1
-            #     view_drivers.insert('', 'end', values=(y[0],y[1],y[2],c))
+            for y in Supa.get_driver_list():
+                c+=1
+                view_drivers.insert('', 'end', values=(y[4],y[2],y[1],y[0],c))
+                
         fetch_drivers_data()
         
         root.mainloop()

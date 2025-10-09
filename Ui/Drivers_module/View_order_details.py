@@ -8,41 +8,11 @@ from Data.Cloud_Supabase.Supa import Supa
 
 def View_order_details_frame(master):
 
-    frame_viewers_tools_1 = Frame()
-    frame_viewers_tools_1.pack()
-
-    customer_label_id_search = Label(frame_viewers_tools_1, text='رقم العضوية')
-    # customer_label_id_search.pack(side='right',padx=14)
-
-    customer_id_entry_search = Entry(frame_viewers_tools_1, justify='right', font=entries_font)  # name customer
-    # customer_id_entry_search.pack(side='right')
-    
-    customer_label_name_search = Label(frame_viewers_tools_1, text='أسم العميل')
-    customer_label_name_search.pack(side='right', padx=10)
-
-    customer_name_search = Entry(frame_viewers_tools_1, justify='right', font=entries_font)  # name customer
-    customer_name_search.pack(side='right', padx=6)
-    
-    customer_label_phone_search = Label(frame_viewers_tools_1, text='رقم العميل')
-    customer_label_phone_search.pack(side='right')
-
-    customer_entry_phone_search = Entry(frame_viewers_tools_1,justify='right', font=entries_font)  # name customer
-    customer_entry_phone_search.pack(side='right')
-    
-    price_of_customer_order_label_search = Label(frame_viewers_tools_1, text='سعر الفاتورة ')
-    # price_of_customer_order_label_search.pack(side='right', padx=10)
-
-    price_of_customer_order_entry_search = Entry(frame_viewers_tools_1, justify='right', font=entries_font)  # name customer
-    # price_of_customer_order_entry_search.pack(side='right')
+    # frame_viewers_tools_1 = Frame()
+    # frame_viewers_tools_1.pack()
 
 
-    # frame_viewers_tools_2 = LabelFrame(frame_viewers_tools, text='الفريم الثاني')
-    # frame_viewers_tools_2.pack(fill='both')
 
-    button_print_reprot = Button(frame_viewers_tools_1, text='🖨️طباعة',
-                            cursor='hand2', bootstyle='info', command=NONE)
-    button_print_reprot.pack(fill='both', pady=4, padx=4, side='left', expand=True)
-    
 
     def fetch_order_data(driver):
         controller_report_treeview.delete(*controller_report_treeview.get_children())
@@ -115,15 +85,6 @@ def View_order_details_frame(master):
 
 
 
-
-    order_id_in_store_lable_search = Label(frame_viewers_tools_1, text='رقم فاتورة المتجر ')
-    order_id_in_store_lable_search.pack(side='right')
-    
-    order_id_in_store_entry_search = Entry(frame_viewers_tools_1,justify='right', font=entries_font)  # name customer
-    order_id_in_store_entry_search.pack(side='right')
-    
-    choose_driver_name_label_search = Label(frame_viewers_tools_1, text='أسم المندوب')
-    choose_driver_name_label_search.pack(side='right', padx=10)
     
     def trace_drivers_name(*args):
         'للبحث عن بأسم المندوب'
@@ -131,23 +92,6 @@ def View_order_details_frame(master):
         fetch_order_data(driver=driver)
 
     driver_var_controller = StringVar()
-
-    global choose_driver_name_search
-    choose_driver_name_search = ttk.Combobox(frame_viewers_tools_1,
-        font=('Times', 12, 'bold'),  cursor='hand2', justify='center', width=13, textvariable=driver_var_controller)
-    choose_driver_name_search.set(value='الكل')
-    choose_driver_name_search.pack(side='right')
-    driver_var_controller.trace_add('write', callback=trace_drivers_name)
-    
-    choose_payment_label_search = Label(frame_viewers_tools_1, text='نوع الدفع')
-    # choose_payment_label_search.pack(side='right', padx=10)
-
-    choose_payment_type_search = ttk.Combobox(frame_viewers_tools_1, values=['كاش','أجل','فيزا'],
-        font=('Times', 12, 'bold'),  cursor='hand2', justify='center', width=7)
-    choose_payment_type_search.set(value='كاش')
-    # choose_payment_type_search.pack(fill='both',side='right')
-
-
 
 
 
@@ -242,8 +186,5 @@ def View_order_details_frame(master):
     network_connection_check_e.pack(side='right', padx=6)
     
 
-    def update_controller_view_items():
-        'تحديث السجلات'
 
-    
-    fetch_order_data(driver=choose_driver_name_search.get())
+    fetch_order_data(driver='الكل')

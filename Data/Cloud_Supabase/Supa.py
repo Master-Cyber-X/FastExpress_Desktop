@@ -124,10 +124,10 @@ class Supa:
 
     def get_driver_list():
         'جلب بيانات الناديب'
-        data = supabase.table('Drivers_Management').select('id_serial,name').order('id_serial', desc=False).execute().data
+        data = supabase.table('Drivers_Management').select('*').order('created_at', desc=False).execute().data
         dataList = []
         for x in data:
-            dataList.append((x['id_serial'],x['name']))
+            dataList.append((x['id_serial'],x['name'],x['phone'],x['addrees'],x['id_number']))
         return dataList
 
     def get_order_list():

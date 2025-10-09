@@ -1,3 +1,4 @@
+from Data.Cloud_Supabase import Supa
 from config.Libaries import *
 # إستدعاء إعدادات النظام
 from config.sys_classes import *
@@ -29,7 +30,6 @@ def Track_drivers_frame(master):
     
     c = 0
     for s in Supa.get_driver_list():
-        print(s)
         c+=1
         driver_treeview.insert('', 'end', values=(s[0],s[1],c))
 
@@ -61,7 +61,7 @@ def Track_drivers_frame(master):
     for x in range(0,2):
         tasks_treeview.column(x, anchor='center')
 
-
+    
     c = 0
     for s in Supa.get_order_list():
         c+=1

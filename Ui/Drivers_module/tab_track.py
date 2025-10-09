@@ -17,7 +17,7 @@ def Track_drivers_tab(master):
     note_book.add(tracke_drivers_and_orders, text='📍 شاشة التتبع')
     
     # شاشة بيانات الشحنات 
-    view_order_details_frame = Frame(note_book)
-    View_order_details_frame(master=view_order_details_frame)
-    note_book.add(view_order_details_frame, text='📍 تفاصيل الشحنات')
+    view_order_details_frames = Frame(note_book)
+    View_order_details_frame(master=view_order_details_frames)
+    note_book.add(view_order_details_frames, text='📍 تفاصيل الشحنات')
     
