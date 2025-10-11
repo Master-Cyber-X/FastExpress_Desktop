@@ -137,6 +137,7 @@ class Supa:
         for x in data:
             dataList.append((x['name']))
         return dataList
+    
     def get_order_list():
         'جلب بيانات الشحنات'
         data = supabase.table('Consignments_management').select('*').eq('driver','مرغني').eq('order_status','جاري التوصيل').order('last_update', desc=False).execute().data
