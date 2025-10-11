@@ -184,8 +184,11 @@ def Controller_and_view_recorder_frame(master,home_img_logo):
 
     # global choose_driver_name
     # choose_driver_name = ttk.Combobox(frame_data_entry, values=list(SQL_DB.fetch_list_drivers_name()),
+
+    
     choose_driver_name = ttk.Combobox(frame_data_entry,
-        font=('Times', 12, 'bold'),  cursor='hand2', justify='center',)
+                                      values=Supa.get_driver_list_name(),
+        font=('Times', 12, 'bold'),  cursor='hand2', justify='center')
     choose_driver_name.set(value='غير معرف')
     choose_driver_name.pack(fill='both', padx=7)
     

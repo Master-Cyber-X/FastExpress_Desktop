@@ -12,7 +12,6 @@ from Ui.Drivers_module.Drivers_report_collections_assignments_return_shipment_fr
 from Ui.statistics.Data_analyzer_frame import analyzer_data_frame
 from Ui.Drivers_module.tab_track import Track_drivers_tab
 
-
 def MyApp(user):
     'تشغيل الظام'
     # page = tb.Window(themename=SQL_DB.get_theme())

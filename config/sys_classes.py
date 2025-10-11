@@ -6,8 +6,18 @@ sys_icon = 'Assets\\Img\\Company_Logo.ico'
 sys_icon_home = 'Assets\\Img\\Courier Software.jpeg'
 
 entries_font  = ('Times',11,'bold')
-    
 
+# تحديث نوع عرض خرائط جوجل
+google_map_graphicals_list = {
+                "Road Map":"https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}",
+                "Satellite":"https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}",
+                "Hybrid":"https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}",
+                "Terrain":"https://mt1.google.com/vt/lyrs=p&x={x}&y={y}&z={z}",
+                "Terrain Detailed":"https://mt1.google.com/vt/lyrs=t&x={x}&y={y}&z={z}",
+                "OSM":"https://a.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                "Dark Mode":"https://cartodb-basemaps-a.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png",
+
+}
     
     # img = Image.open('Assets\\Img\\Courier Software.jpeg').resize((1610,980))
     # # img = Image.open('Module\\sys_Image\\good-morning-morning-flowers.gif')

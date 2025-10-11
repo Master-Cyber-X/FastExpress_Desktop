@@ -1,7 +1,7 @@
 from config.Libaries import *
 from config.sys_classes import *
-from tkinter import PhotoImage
-import random
+
+
 
 def map_view(master):
     # ========== الأعلى ==========
@@ -21,42 +21,62 @@ def map_view(master):
     lon_entry.pack(side=LEFT)
 
     # ========== الخريطة ==========
-    map_widget = TkinterMapView(master, width=800, height=500, corner_radius=10)
-    map_widget.pack(fill=BOTH, expand=True, padx=10, pady=10)
-    map_widget.set_tile_server("https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}")  # خريطة طرق
-
+    mapView = TkinterMapView(master, width=800, height=650, corner_radius=10)
+    mapView.pack(fill=BOTH, expand=True, padx=10, pady=10)
+    mapView.set_tile_server("https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}")
 
     # إعداد مبدئي (الرياض)
-    map_widget.set_position(24.7136, 46.6753)
-    map_widget.set_zoom(5)
+    mapView.set_position(24.7136, 46.6753)
+    mapView.set_zoom(5)
+    
 
     # تحميل أيقونة السيارة
     car_icon = PhotoImage(file=r"Assets\Img\pgs-person.png")
 
+    def animate_zoom(target_zoom, step=0.5, delay=50):
+        """تحريك تكبير الخريطة تدريجيًا"""
+        current_zoom = mapView.zoom
+        if abs(current_zoom - target_zoom) < 0.1:
+            mapView.set_zoom(target_zoom)
+            return
+        new_zoom = current_zoom + step if current_zoom < target_zoom else current_zoom - step
+        mapView.set_zoom(new_zoom)
+        master.after(delay, lambda: animate_zoom(target_zoom, step, delay))
+
     def search_location():
+        mapView.delete_all_marker()
         try:
             lat = float(lat_entry.get())
             lon = float(lon_entry.get())
 
             # تحريك الخريطة
-            map_widget.set_position(lat, lon)
-            map_widget.set_zoom(100)
+            mapView.set_position(lat, lon)
+
+            # 🔥 تكبير تدريجي (أنميشن)
+            animate_zoom(15, step=0.3, delay=40)
 
             # إضافة Marker مع أيقونة السيارة
-            map_widget.set_marker(
+            mapView.set_marker(
                 lat, lon,
                 text=f"R- {random.randint(1,100)} المندوب ",
                 icon=car_icon
             )
 
-            # ✅ بعد البحث: تكبير النافذة
+            # تكبير النافذة
             master.state('zoomed')
-            # أو استخدم التالي لو تفضل ملء الشاشة بالكامل:
-            # master.attributes('-fullscreen', True)
-            # master.bind("<Escape>", lambda e: master.attributes('-fullscreen', False))
 
         except ValueError:
-            print("تأكد من أن الإحداثيات أرقام صحيحة")
+            print("⚠️ تأكد من أن الإحداثيات أرقام صحيحة")
+    
+    def change_map_graphicals_type(*args):
+        mapView.set_tile_server(google_map_graphicals_list[va.get()])
+        
+        
+    va = StringVar()
 
+    ch = Combobox(input_frame, cursor='hand2', values=[i for i in google_map_graphicals_list.keys()], textvariable=va)
+    ch.pack(side='right')
+    va.trace_add('write', callback=change_map_graphicals_type)
+    
     search_btn = Button(input_frame, text="بحث", command=search_location)
     search_btn.pack(side=LEFT, padx=10)

@@ -30,10 +30,6 @@ def Track_drivers_frame(master):
     for x in range(0,2):
         driver_treeview.column(x, anchor='center', width=50)
     
-    c = 0
-    for s in Supa.get_driver_list():
-        c+=1
-        driver_treeview.insert('', 'end', values=(s[0],s[1],c))
 
 
 
@@ -72,11 +68,26 @@ def Track_drivers_frame(master):
         tasks_treeview.column(x, anchor='center')
 
     
-    c = 0
-    for s in Supa.get_order_list():
-        c+=1
-        tasks_treeview.insert('', 'end', values=(s[0],s[1],c))
+    def update_data():
+    # جلب بيانات الحركات
+        tasks_treeview.delete(*tasks_treeview.get_children())
+        c = 0
+        for s in Supa.get_order_list():
+            c+=1
+            tasks_treeview.insert('', 'end', values=(s[0],s[1],c))
+    
+    # جلب بيانات المناديب
+    d = 0
+    for s in Supa.get_driver_list():
+        d+=1
+        driver_treeview.insert('', 'end', values=(s[0],s[1],d))
+    
 
+    def update():
+        update_data()
+        tasks_treeview.after(1000, update)
+    update()
+        
 
 
 
