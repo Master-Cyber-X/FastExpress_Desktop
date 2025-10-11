@@ -3,7 +3,7 @@ from config.Libaries import *
 
 # إستدعاء إعدادات النظام
 from config.sys_classes import *
-    
+
 # إستدعاء واجهات رسومية
 from Ui.Consignmets_Report_Module.Shipments_crud_controller_frame import Controller_and_view_recorder_frame
 from Ui.Consignmets_Report_Module.Shipments_report_frame import Shipment_viewer_report_frame
@@ -11,6 +11,7 @@ from Ui.Consignmets_Report_Module.Shipments_collection_full_report_frame import 
 from Ui.Drivers_module.Drivers_report_collections_assignments_return_shipment_frame import Drivers_report_collections_asaginment_back_shipment_frame
 from Ui.statistics.Data_analyzer_frame import analyzer_data_frame
 from Ui.Drivers_module.tab_track import Track_drivers_tab
+
 
 def MyApp(user):
     'تشغيل الظام'

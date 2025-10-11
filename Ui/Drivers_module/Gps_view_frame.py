@@ -63,7 +63,7 @@ def map_view(master):
             )
 
             # تكبير النافذة
-            master.state('zoomed')
+            # master.state('zoomed')
 
         except ValueError:
             print("⚠️ تأكد من أن الإحداثيات أرقام صحيحة")

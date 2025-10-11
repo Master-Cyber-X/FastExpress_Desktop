@@ -85,7 +85,7 @@ def Track_drivers_frame(master):
 
     def update():
         update_data()
-        tasks_treeview.after(1000, update)
+        tasks_treeview.after(4000, update)
     update()
         
 
